@@ -1,0 +1,10 @@
+#
+# Routes
+#
+
+# Home page
+GET     /findRegions                                    controllers.Application.listRegions
+POST    /region                                         controllers.Application.addRegion
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assetssublime_text.desktop/*file               controllers.Assets.versioned(path="/public", file)
