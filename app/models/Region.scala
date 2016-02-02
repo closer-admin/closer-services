@@ -11,7 +11,11 @@ object Region {
   implicit val json2Region = Json.reads[Region]
 
 
-  var regions = List(Region("Region1", "Some description of region 1"), Region("Region2", "Some description of region 1"))
+  var regions = List(
+    Region("Region1", "Some description of region 1"),
+    Region("Region2", "Some description of region 2"),
+    Region("Region3", "Some description of region 3")
+  )
 
   def add(b: Region) = regions = regions ::: List(b)
 }

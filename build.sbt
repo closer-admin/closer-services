@@ -1,11 +1,30 @@
-name := "closer"
+import com.typesafe.config._
 
-version := "1.0-SNAPSHOT"
+val conf = ConfigFactory
+  .parseFile(file("conf/application.conf"))
+  .resolve()
 
-scalaVersion := "2.10.5"
 
-lazy val root = project.in(file(".")).enablePlugins(PlayScala)
 
-herokuAppName in Compile := "dry-bastion-13599"
+lazy val commonSettings = Seq (
+  name := "closer",
+  organization := "com.closer",
+  version := "1.0-SNAPSHOT",
+  scalaVersion := "2.10.5"
+)
 
-fork in run := true
+lazy val root = project.in(file("."))
+  .enablePlugins(PlayScala)
+  .settings(commonSettings)
+
+
+herokuAppName in Compile := $("heroku.application.name")
+
+
+/**
+ * Helper methods to work with configuration
+ */
+def $(name:String):String = {
+  conf.getString(name)
+}
+
