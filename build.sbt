@@ -1,5 +1,6 @@
 import sbt._
 import Utils._
+import Dependencies._
 
 lazy val commonSettings = Seq (
   name := "closer",
@@ -14,8 +15,11 @@ lazy val root = project.in(file("."))
 
 herokuAppName in Compile := $("heroku.application.name")
 
-//libraryDependencies ++= Seq(
-//)
+resolvers += DefaultMavenRepository
+
+libraryDependencies ++= Seq(
+  mongoDriver
+)
 
 
 
