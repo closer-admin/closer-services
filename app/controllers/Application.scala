@@ -1,13 +1,20 @@
 package controllers
 
+import dao.RegionsMongoDao
+import models.Region._
 import play.api.libs.json._
 import play.api.mvc._
-import models.Region._
 
 object Application extends Controller {
 
+  val dao = new RegionsMongoDao("localhost", "test", "test")
+
+  def init = Action {
+    Ok(Json.obj("status" -> "OK"))
+  }
+
   def listRegions = Action {
-    Ok(Json.toJson(regions))
+    Ok(Json.obj("status" -> "OK"))
   }
 
   def addRegion = Action(BodyParsers.parse.json) { request =>
@@ -16,8 +23,8 @@ object Application extends Controller {
       errors => {
         BadRequest(Json.obj("status" -> "OK", "message" -> JsError.toJson(errors)))
       },
-      book => {
-        add(book)
+      region => {
+        dao.insert(region)
         Ok(Json.obj("status" -> "OK"))
       }
     )

@@ -1,10 +1,6 @@
-import com.typesafe.config._
-
-val conf = ConfigFactory
-  .parseFile(file("conf/application.conf"))
-  .resolve()
-
-
+import sbt._
+import Utils._
+import Dependencies._
 
 lazy val commonSettings = Seq (
   name := "closer",
@@ -15,16 +11,22 @@ lazy val commonSettings = Seq (
 
 lazy val root = project.in(file("."))
   .enablePlugins(PlayScala)
+  .enablePlugins(MongoPlugin)
   .settings(commonSettings)
-
 
 herokuAppName in Compile := $("heroku.application.name")
 
+resolvers += DefaultMavenRepository
 
-/**
- * Helper methods to work with configuration
- */
-def $(name:String):String = {
-  conf.getString(name)
-}
+libraryDependencies ++= Seq(
+  mongoDriver
+)
+
+
+
+
+
+
+
+
 
