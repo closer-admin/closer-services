@@ -1,4 +1,4 @@
-import Utils._
+import CommonUtils._
 import sbt._
 
 object MongoPlugin extends AutoPlugin {
@@ -88,9 +88,6 @@ object MongoUtils {
   val defaultPort = "27017"
   val defaultDb = "test"
 
-  val env = sys.props.getOrElse("env", default = "loc")
-  val envLoc = "loc"
-  val envDev = "dev"
 
   /**
     * mongo

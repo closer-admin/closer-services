@@ -3,8 +3,8 @@
 #
 
 # Home page
-GET     /regions                             com.closer.services.controllers.Application.getAllRegions
-POST    /region                                  com.closer.services.controllers.Application.addRegion
+GET         /api/regions        @com.closer.services.controllers.RegionController.getAllRegions
+POST        /api/region         @com.closer.services.controllers.RegionController.addRegion
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file        controllers.Assets.versioned(path="/public", file)
+GET        /assets/*file        controllers.Assets.versioned(path="/public", file)

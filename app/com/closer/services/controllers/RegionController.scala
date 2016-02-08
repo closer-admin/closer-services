@@ -1,13 +1,15 @@
 package com.closer.services.controllers
 
-import com.closer.services.dao.RegionsMongoDao
+import javax.inject.{Named, Singleton, Inject}
+
+import com.closer.services.dao.RegionDao
 import com.closer.services.models.Region
 import play.api.libs.json._
 import play.api.mvc._
 
-object Application extends Controller {
+@Singleton
+class RegionController @Inject() (val dao: RegionDao) extends Controller  {
 
-  val dao = new RegionsMongoDao()
 
   def getAllRegions = Action {
     Ok(Json.toJson(dao.getAll()))

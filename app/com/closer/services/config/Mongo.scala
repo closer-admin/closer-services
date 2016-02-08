@@ -1,17 +1,16 @@
 package com.closer.services.config
 
+import javax.inject.Inject
+
 import com.mongodb.ServerAddress
 import com.mongodb.casbah.Imports._
 import com.mongodb.casbah.MongoDB
 import play.api.Configuration
-import play.api.Play.current
 
 /**
   * Created by rudkodm on 2/8/16.
   */
-trait Mongo {
-//  val configuration: Configuration = current.configuration
-  val configuration: Configuration = Configuration.empty
+class Mongo @Inject() (configuration: Configuration){
 
   val host: String = configuration.getString("mongo.host").getOrElse("127.0.0.1")
 
@@ -43,5 +42,3 @@ trait Mongo {
 
   override def toString = s"$host:$port/$db"
 }
-
-object Mongo extends Mongo
