@@ -1,6 +1,6 @@
-package dao
+package com.closer.regions.data.dao
 
-import models.Region._
+import com.closer.regions.data.entities.Region
 
 object RegionsMongoDao {
   val f_name = "name"

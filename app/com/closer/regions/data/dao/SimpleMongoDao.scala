@@ -1,4 +1,4 @@
-package dao
+package com.closer.regions.data.dao
 
 import com.mongodb.casbah.Imports._
 import java.util.Date
