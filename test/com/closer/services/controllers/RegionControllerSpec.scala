@@ -1,6 +1,7 @@
 package com.closer.services.controllers
 
-import com.closer.services.dao.RegionDao
+import com.closer.regions.controllers.RegionController
+import com.closer.regions.data.dao.RegionDao
 import com.closer.services.models.Region
 import org.mockito.Mockito._
 import org.scalatest.mock.MockitoSugar

@@ -1,6 +1,6 @@
-package com.closer.services.config
+package com.closer.regions.config
 
-import com.closer.services.dao.{RegionDao, RegionMongoDao}
+import com.closer.regions.data.dao.{RegionDao, RegionMongoDao}
 import com.google.inject.AbstractModule
 
 class DefaultModule extends AbstractModule {

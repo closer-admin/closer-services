@@ -1,4 +1,4 @@
-package com.closer.services.config
+package com.closer.regions.config
 
 import javax.inject.Inject
 

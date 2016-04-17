@@ -1,9 +1,10 @@
-package com.closer.services.controllers
+package com.closer.regions.controllers
 
-import javax.inject.{Named, Singleton, Inject}
+import javax.inject.{Inject, Singleton}
 
-import com.closer.services.dao.RegionDao
-import com.closer.services.models.Region
+import com.closer.regions.data.dao.RegionDao
+import com.closer.regions.data.entities.RegionEntity
+import com.closer.regions.model.Region
 import play.api.libs.json._
 import play.api.mvc._
 
@@ -12,7 +13,7 @@ class RegionController @Inject() (val dao: RegionDao) extends Controller  {
 
 
   def getAllRegions = Action {
-    Ok(Json.toJson(dao.getAll()))
+    Ok(Json.toJson(dao.getAll().map(RegionEntity.entity2Region(_))))
   }
 
   //curl -H "Content-Type: application/json" -X POST -d '{"name":"RegionXXX","description":"Some description"}' http://localhost:9000/region

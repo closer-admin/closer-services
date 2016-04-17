@@ -5,7 +5,7 @@ import org.joda.time.DateTime
 /**
   * Created by rudkodm on 4/17/16.
   */
-case class Promotion(
+case class PromotionEntity(
                       id: String,
                       serviceId: String,
                       promoCode: String,
@@ -14,5 +14,5 @@ case class Promotion(
                       expirationDateTime: DateTime,
                       shortDescription: String,
                       fullDescription: String,
-                      rule: Rule
+                      rule: RuleEntity
                     )

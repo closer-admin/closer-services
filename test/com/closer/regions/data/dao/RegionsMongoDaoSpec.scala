@@ -1,4 +1,4 @@
-package com.closer.services.dao
+package com.closer.regions.data.dao
 
 import org.scalatestplus.play.PlaySpec
 
