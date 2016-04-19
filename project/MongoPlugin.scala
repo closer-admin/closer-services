@@ -58,19 +58,19 @@ object MongoPlugin extends AutoPlugin {
     },
     mongoDrop := {
       val mongo = mongoSetting.value
-      val command = mongo apply "db.test.drop()"
+      val command = mongo apply "db.regions.drop()"
       println(command)
       println(command !!)
     },
     mongoImport := {
       val mongoimport = mongoimportSetting.value
-      val command = mongoimport apply("test", "testdata.json")
+      val command = mongoimport apply("regions", "testdata/regions.json")
       println(command)
       println(command !!)
     },
     mongoExport := {
       val mongoexport = mongoexportSetting.value
-      val command = mongoexport apply("test", "testdata.json")
+      val command = mongoexport apply("regions", "testdata/regions.json")
       println(command)
       println(command !!)
     }

@@ -18,14 +18,15 @@ herokuAppName in Compile := $("heroku.application.name")
 
 resolvers ++= Seq(
   DefaultMavenRepository,
-  Resolver.typesafeRepo("Release")
+  Resolver.typesafeRepo("Release"),
+  Resolver.sonatypeRepo("releases")
 )
 
 libraryDependencies ++= Seq(
   mongoDriver,
   scalaTest,
   scalaTestPlay,
-  mockito
+  salat
 )
 
 

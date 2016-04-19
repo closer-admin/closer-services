@@ -2,7 +2,11 @@ import com.typesafe.config._
 import java.io.File
 
 object CommonUtils {
-  val configFilePath = sys.props.getOrElse("config.file", default = "conf/application.conf")
+  val envSuffix = sys.props.get("env")
+  val configFilePath = envSuffix match {
+    case Some(suffix) => s"conf/application-${suffix}.conf"
+    case None => "conf/application.conf"
+  }
 
   case class Env(configFile: File)
   val env = Env(new File(configFilePath))
