@@ -7,7 +7,7 @@ import org.scalatest.Assertions
   * Created by rudkodm on 4/13/16.
   */
 trait JsonTestCommon extends Assertions {
-  def $(result: JsLookupResult): JsValue = {
+  def >>(result: JsLookupResult): JsValue = {
     result match {
       case JsDefined(v) => v
       case undefined: JsUndefined => fail(undefined.validationError.message)

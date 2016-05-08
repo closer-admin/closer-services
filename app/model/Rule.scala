@@ -7,6 +7,5 @@ case class Rule(
                )
 
 object Rule {
-  implicit val object2Json = Json.writes[Rule]
-  implicit val json2object = Json.reads[Rule]
+  implicit val ruleJsonFormat = Json.format[Rule]
 }

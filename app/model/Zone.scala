@@ -8,6 +8,5 @@ case class Zone(
                )
 
 object Zone {
-  implicit val object2Json = Json.writes[Zone]
-  implicit val json2object = Json.reads[Zone]
+  implicit val zoneJsonFormat = Json.format[Zone]
 }

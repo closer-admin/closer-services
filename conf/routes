@@ -6,7 +6,7 @@
 GET           /api/regions            @controllers.RegionController.all
 GET           /api/regions/:id        @controllers.RegionController.getById(id)
 DELETE        /api/regions/:id        @controllers.RegionController.removeById(id)
-POST          /api/regions            @controllers.RegionController.add
+POST          /api/regions            @controllers.RegionController.save
 
 # Map static resources from the /public folder to the /assets URL path
 GET           /assets/*file           controllers.Assets.versioned(path="/public", file)

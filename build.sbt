@@ -25,6 +25,7 @@ resolvers ++= Seq(
 libraryDependencies ++= Seq(
   mongoDriver,
   scalaTest,
+  scalaMock,
   scalaTestPlay,
   salat
 )

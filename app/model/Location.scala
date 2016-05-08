@@ -8,6 +8,5 @@ case class Location(
                    )
 
 object Location {
-  implicit val object2Json = Json.writes[Location]
-  implicit val json2object = Json.reads[Location]
+  implicit val locationJsonFormat = Json.format[Location]
 }

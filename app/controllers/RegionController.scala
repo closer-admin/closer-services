@@ -2,42 +2,40 @@ package controllers
 
 import javax.inject.{Inject, Singleton}
 
-import data.storages.RegionStorage
 import model.Region
+import play.api.Logger
 import play.api.libs.json._
 import play.api.mvc._
+import services.RegionService
 
 @Singleton
-class RegionController @Inject()(val regions: RegionStorage) extends Controller {
+class RegionController @Inject()(val regions: RegionService) extends Controller with ControllersCommon {
 
-  def all = Action {
-    Ok(
-      Json.toJson(
-        regions.all().map(Region.entity2Region(_))
-      )
-    )
+  def all = ActionTemplate { request =>
+    regions.all()
   }
 
-  //curl -H "Content-Type: application/json" -X POST -d '{"name":"RegionXXX","description":"Some description"}' http://localhost:9000/region
-  def add = Action(BodyParsers.parse.json) { request =>
+  //curl -H "Content-Type: application/json" -X POST -d '{"name":"Some region name","description":"Some description", "promotions": []' http://localhost:9000/api/regions
+  def save = Action(parse.json) { request =>
     val validate = request.body.validate[Region]
     validate.fold(
       errors => {
-        BadRequest(Json.obj("status" -> "OK", "message" -> JsError.toJson(errors)))
+        logger.error(errors.toString())
+        BadRequest(FailureRS)
       },
       region => {
-        regions.insert(region)
-        Ok(Json.obj("status" -> "OK"))
+        regions.save(region)
+        Ok(Json.toJson(region))
       }
     )
   }
 
-  def getById(id: String) = Action {
-    NoContent
+  def removeById(id: String) = ActionTemplate { request =>
+    regions.removeById(id)
+    SuccessRS
   }
 
-  def removeById(id: String) = Action {
-    NoContent
+  def getById(id: String) = ActionTemplate { request =>
+    regions.getById(id)
   }
-
 }

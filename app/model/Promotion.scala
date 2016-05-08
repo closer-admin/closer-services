@@ -5,7 +5,7 @@ import org.joda.time.DateTime
 import play.api.libs.json._
 
 case class Promotion(
-                      id: String,
+                      id: Option[String] = None,
                       serviceId: String,
                       promoCode: Option[String] = None,
                       media: Option[String] = None,
@@ -17,7 +17,6 @@ case class Promotion(
                     )
 
 object Promotion {
-
-  implicit val jodaFormat = DateTimeFormat
+  implicit val jodaJsonFormat = DateTimeFormat
   implicit val promotionJsonFormat = Json.format[Promotion]
 }
