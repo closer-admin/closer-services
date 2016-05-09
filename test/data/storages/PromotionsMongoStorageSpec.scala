@@ -31,13 +31,13 @@ class PromotionsMongoStorageSpec extends FlatSpec with Matchers with BeforeAndAf
   "all()" should "fetch 1 Promotion after it was stored there" in new LocalMongo {
     val regionalPromotions = promotions.of(regionId)
 
-    regionalPromotions.insert(somePromotion)
+    regionalPromotions.save(somePromotion)
 
     regionalPromotions.all() should have size 1
   }
 
   "insert()" should "should store Promotion object without throwing exception" in new LocalMongo {
-    promotions.of(regionId).insert(somePromotion)
+    promotions.of(regionId).save(somePromotion)
   }
 
   "findById()" should "find previously stored Promotion" in new LocalMongo {
@@ -45,7 +45,7 @@ class PromotionsMongoStorageSpec extends FlatSpec with Matchers with BeforeAndAf
     val promotion = somePromotion
     val promotionId = promotion.id.toHexString
 
-    regionalPromotions.insert(promotion)
+    regionalPromotions.save(promotion)
 
     regionalPromotions.findById(promotionId) should be equals promotion
   }
@@ -55,7 +55,7 @@ class PromotionsMongoStorageSpec extends FlatSpec with Matchers with BeforeAndAf
     val promotion = somePromotion
     val promotionId = promotion.id.toHexString
 
-    regionalPromotions.insert(promotion)
+    regionalPromotions.save(promotion)
     regionalPromotions.removeById(promotionId)
 
     regionalPromotions.findById(promotionId) should be equals None

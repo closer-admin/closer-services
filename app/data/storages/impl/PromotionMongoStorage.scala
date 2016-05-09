@@ -27,7 +27,7 @@ class PromotionMongoStorage @Inject()(mongo: Mongo) extends PromotionStorage wit
     }
   }
 
-  override def insert(regionId: String)(promo: PromotionEntity): Unit = {
+  override def save(regionId: String)(promo: PromotionEntity): Unit = {
     val promoObject: DBObject = grater[PromotionEntity].asDBObject(promo)
     dao.update(
       $oid(regionId),

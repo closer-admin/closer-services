@@ -33,4 +33,8 @@ class RegionMongoStorage @Inject()(mongo: Mongo) extends RegionStorage with Mong
   override def removeAll(): Unit ={
     dao.collection.remove(o.empty)
   }
+
+  override def save(region: RegionEntity): Unit = {
+    dao.save(region)
+  }
 }

@@ -12,7 +12,7 @@ trait PromotionStorage {
 
   def all(regionId: String)(): Seq[PromotionEntity]
 
-  def insert(regionId: String)(promo: PromotionEntity): Unit
+  def save(regionId: String)(promo: PromotionEntity): Unit
 
   def removeById(regionId: String)(id: String): Unit
 
@@ -25,7 +25,7 @@ trait PromotionStorage {
 
     def all() = self.all(regionId): Seq[PromotionEntity]
 
-    def insert(promo: PromotionEntity): Unit = self.insert(regionId)(promo)
+    def save(promo: PromotionEntity): Unit = self.save(regionId)(promo)
 
     def removeById(id: String): Unit = self.removeById(regionId)(id)
 

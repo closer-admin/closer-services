@@ -1,10 +1,11 @@
-package services
+package services.impl
 
 import javax.inject.{Inject, Singleton}
 
 import data.entities.RegionEntity
 import data.storages.RegionStorage
 import model.Region
+import services.RegionService
 import services.convertion.RegionFormat
 
 @Singleton
