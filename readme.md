@@ -1,35 +1,77 @@
 # clo$er services:
- 
-## Environment requirements:
-- java 1.8.+
-- sbt 0.13.8 // optional 
-- typesafe-activator-1.3.7 // optional
 
-## Local:
+## REQUIREMENTS:
+- java 1.8
+- sbt 0.13.8
+- typesafe-activator-1.3.7
+
+## LOCAL:
 ### Running application:
-- If full typesafe-activator installed and added to PATH, than: 
+- To run project locally:
+
 ```
-cd ${PROJECT_HOME}
-activator run
-```
-- Else activator-launcher-*.jar can be used. In this case launcher will download all bunch of required dependencies 
-(I would say that it is approximately 500-600 mb, so it can take long time).
-```
-cd ${PROJECT_HOME}
-./activator run
+sbt run
 ```
 
-## Heroku:
+By default sbt scripts will use **application.conf** configuration file.
+To run sbt with another configs should be used:
+
+```
+sbt -Denv=${prefix}
+```
+
+In this case SBT will use **application-${prefix}.conf** configuration.
+
+## MONGO PLUGIN:
+To use plugin firstly need to run SBT with appropriate config file.
+Plugin use following properties from config:
+
+```
+mongo.collection = ...
+mongo.user = ...
+mongo.password = ...
+mongo.host = ...
+mongo.port = ...
+mongo.dbname = ...
+```
+
+Name of collection should be the same as name of json file with test data in folder "testdata", ie:
+
+```
+mongo.collection = "regions"
+...
+testdata/regions.json
+```
+
+Plugin define following tasks:
+
+```
+mongoDrop // Drop ${mongo.collection}
+mongoImport // Import data from testdata/${mongo.collection}.json to collection ${mongo.collection}
+mongoExport // Export data from collection ${mongo.collection} to testdata/${mongo.collection}.json
+```
+
+
+## HEROKU:
 ### Deploying application
 - To deploy application run:
+
 ```
-activator stage deployHeroku
+sbt stage deployHeroku
 ```
+
 ### Heroku environment info:
-- **UDL:** https://dry-bastion-13599.herokuapp.com
-- **GIT:** https://git.heroku.com/dry-bastion-13599.git
+- https://dry-bastion-13599.herokuapp.com
 
-## Services:
+## SERVICES:
+### Regions:
+- `GET::/api/regions` - Get all Regions
+- `GET::/api/regions/:id` - Get Region by ID
+- `DELETE::/api/regions/:id` - Delete Region by ID
+- `POST::/api/regions` - Save or Update Region
 
-### GET ALL REGIONS:
-- GET /findRegions
+### Promotions:
+- `GET::/api/regions/:regionId/promotions` - Get all Promotions of particular Region
+- `GET::/api/regions/:regionId/promotions/:id` - Get Promotion by ID
+- `DELETE::/api/regions/:regionId/promotions/:id` - Delete Promotion by ID
+- `POST::/api/regions/:regionId/promotions` - Save or Update Promotion

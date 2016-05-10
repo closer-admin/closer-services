@@ -16,6 +16,8 @@ object MongoPlugin extends AutoPlugin {
 
   import autoImport._
 
+  val collection = $("mongo.collection")
+
   lazy val mongoSettings: Seq[Def.Setting[_]] = Seq(
     mongoSetting := {
       env match {
@@ -58,19 +60,19 @@ object MongoPlugin extends AutoPlugin {
     },
     mongoDrop := {
       val mongo = mongoSetting.value
-      val command = mongo apply "db.regions.drop()"
+      val command = mongo apply s"db.${collection}.drop()"
       println(command)
       println(command !!)
     },
     mongoImport := {
       val mongoimport = mongoimportSetting.value
-      val command = mongoimport apply("regions", "testdata/regions.json")
+      val command = mongoimport apply(collection, s"testdata/${collection}.json")
       println(command)
       println(command !!)
     },
     mongoExport := {
       val mongoexport = mongoexportSetting.value
-      val command = mongoexport apply("regions", "testdata/regions.json")
+      val command = mongoexport apply(collection, s"testdata/${collection}.json")
       println(command)
       println(command !!)
     }
