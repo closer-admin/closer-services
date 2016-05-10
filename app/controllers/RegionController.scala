@@ -3,8 +3,6 @@ package controllers
 import javax.inject.{Inject, Singleton}
 
 import model.Region
-import play.api.Logger
-import play.api.libs.json._
 import play.api.mvc._
 import services.RegionService
 

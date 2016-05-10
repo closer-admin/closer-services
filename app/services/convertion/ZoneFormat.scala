@@ -1,7 +1,7 @@
 package services.convertion
 
-import data.entities.{LocationEntity, ZoneEntity}
-import model.{Location, Zone}
+import data.entities.ZoneEntity
+import model.Zone
 
 object ZoneFormat extends ConverionFormat[Zone, ZoneEntity]{
 

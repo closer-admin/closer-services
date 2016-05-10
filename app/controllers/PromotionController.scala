@@ -2,10 +2,9 @@ package controllers
 
 import javax.inject.{Inject, Singleton}
 
-import model.{Promotion, Region}
-import play.api.libs.json._
+import model.Promotion
 import play.api.mvc._
-import services.{PromotionService, RegionService}
+import services.PromotionService
 
 @Singleton
 class PromotionController @Inject()(val promotions: PromotionService) extends Controller with ControllerTemplates {

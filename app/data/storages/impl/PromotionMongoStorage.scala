@@ -5,13 +5,11 @@ import javax.inject.{Inject, Singleton}
 import com.mongodb.casbah.query.Imports._
 import com.novus.salat.dao.SalatDAO
 import com.novus.salat.global._
-import config._
 import com.novus.salat.grater
+import config._
 import data.entities.{PromotionEntity, RegionEntity}
 import data.storages.PromotionStorage
 import data.storages.common.MongoQueryAliaces
-import play.api.Configuration
-import play.api.inject.guice.GuiceApplicationBuilder
 
 @Singleton
 class PromotionMongoStorage @Inject()(mongo: Mongo) extends PromotionStorage with MongoQueryAliaces {

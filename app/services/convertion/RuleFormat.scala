@@ -1,7 +1,7 @@
 package services.convertion
 
-import data.entities.{RuleEntity, ZoneEntity}
-import model.{Rule, Zone}
+import data.entities.RuleEntity
+import model.Rule
 
 object RuleFormat extends ConverionFormat[Rule, RuleEntity]{
 

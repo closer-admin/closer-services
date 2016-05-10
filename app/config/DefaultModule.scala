@@ -1,10 +1,10 @@
 package config
 
-import data.storages.{PromotionStorage, RegionStorage}
 import com.google.inject.AbstractModule
 import data.storages.impl.{PromotionMongoStorage, RegionMongoStorage}
-import services.{PromotionService, RegionService}
+import data.storages.{PromotionStorage, RegionStorage}
 import services.impl.{PromotionServiceImpl, RegionServiceImpl}
+import services.{PromotionService, RegionService}
 
 class DefaultModule extends AbstractModule {
   def configure() = {

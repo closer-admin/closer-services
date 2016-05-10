@@ -26,7 +26,6 @@ class Mongo @Inject()(configuration: Configuration) {
   logger.info(s"port : $port")
   logger.info(s"db : $db")
   logger.info(s"name : $name")
-  logger.info(s"pass : $pass")
 
   val mongodb: MongoDB = {
     val server = new ServerAddress(host, port)

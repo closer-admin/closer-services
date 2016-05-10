@@ -1,6 +1,6 @@
+import com.mongodb.casbah.commons.conversions.scala.{RegisterConversionHelpers, RegisterJodaTimeConversionHelpers}
 import com.novus.salat.global.{ctx => SalatGlobalContext}
 import play.api._
-import com.mongodb.casbah.commons.conversions.scala.{RegisterConversionHelpers, RegisterJodaTimeConversionHelpers}
 
 object Global extends GlobalSettings {
   override def onStart(app: Application) = {
@@ -9,4 +9,7 @@ object Global extends GlobalSettings {
     RegisterConversionHelpers()
     RegisterJodaTimeConversionHelpers()
   }
+
+
+
 }

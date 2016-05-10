@@ -1,7 +1,7 @@
 package services.convertion
 
-import data.entities.{PromotionEntity, RegionEntity}
-import model.{Promotion, Region}
+import data.entities.PromotionEntity
+import model.Promotion
 import org.bson.types.ObjectId
 
 object PromotionFormat extends ConverionFormat[Promotion, PromotionEntity] {
