@@ -5,9 +5,11 @@ import javax.inject.Inject
 import com.mongodb.ServerAddress
 import com.mongodb.casbah.Imports._
 import com.mongodb.casbah.MongoDB
-import play.api.Configuration
+import play.api.{Configuration, Logger}
 
 class Mongo @Inject()(configuration: Configuration) {
+
+  val logger = Logger(this.getClass)
 
   val host: String = configuration.getString("mongo.host").getOrElse("127.0.0.1")
 
@@ -18,6 +20,13 @@ class Mongo @Inject()(configuration: Configuration) {
   val name: String = configuration.getString("mongo.user").getOrElse(null)
 
   val pass: String = configuration.getString("mongo.password").getOrElse(null)
+
+  logger.info("============= MONGO CONNECTION INFO ===========")
+  logger.info(s"host : $host")
+  logger.info(s"port : $port")
+  logger.info(s"db : $db")
+  logger.info(s"name : $name")
+  logger.info(s"pass : $pass")
 
   val mongodb: MongoDB = {
     val server = new ServerAddress(host, port)
@@ -33,7 +42,7 @@ class Mongo @Inject()(configuration: Configuration) {
   }
 
   def secureClient(server: ServerAddress) = {
-    val credentials = MongoCredential.createPlainCredential(name, db, pass.toCharArray)
+    val credentials = MongoCredential.createCredential(name, db, pass.toCharArray)
     MongoClient(server, List(credentials))
   }
 
