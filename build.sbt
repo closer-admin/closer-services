@@ -15,8 +15,9 @@ lazy val root = project.in(file("."))
   .settings(commonSettings)
 
 herokuAppName in Compile := $("heroku.application.name")
-herokuConfigVars in Compile := Map(
-  "JAVA_OPTS" -> "-Denv=dev"
+
+javaOptions in Universal ++= Seq(
+  "-Denv=dev"
 )
 
 resolvers ++= Seq(
