@@ -31,7 +31,8 @@ libraryDependencies ++= Seq(
   scalaTest,
   scalaMock,
   scalaTestPlay,
-  salat
+  salat,
+  filters
 )
 
 
