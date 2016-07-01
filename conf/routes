@@ -7,6 +7,7 @@ GET           /api/regions                                 @controllers.RegionCo
 GET           /api/regions/:id                             @controllers.RegionController.getById(id)
 DELETE        /api/regions/:id                             @controllers.RegionController.removeById(id)
 POST          /api/regions                                 @controllers.RegionController.save
+POST          /api/regions/wraps                           @controllers.RegionController.getInZoneRegions
 
 # Promotions
 GET           /api/regions/:regionId/promotions            @controllers.PromotionController.all(regionId)

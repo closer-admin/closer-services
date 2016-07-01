@@ -69,6 +69,16 @@ sbt stage deployHeroku
 - `GET::/api/regions/:id` - Get Region by ID
 - `DELETE::/api/regions/:id` - Delete Region by ID
 - `POST::/api/regions` - Save or Update Region
+- `POST::/api/regions/wraps` - Return all regions that wrap sent point.
+
+```
+// Example of Location RQ object that should be sent to  /api/regions/wraps endpoint
+{
+    "latitude": 53.9298819,
+    "longitude": 27.5772205
+}
+```
+
 
 ### Promotions:
 - `GET::/api/regions/:regionId/promotions` - Get all Promotions of particular Region

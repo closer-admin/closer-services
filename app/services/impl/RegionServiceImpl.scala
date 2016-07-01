@@ -4,7 +4,7 @@ import javax.inject.{Inject, Singleton}
 
 import data.entities.RegionEntity
 import data.storages.RegionStorage
-import model.Region
+import model.{Location, Region}
 import services.RegionService
 import services.convertion.RegionFormat
 
@@ -24,6 +24,17 @@ class RegionServiceImpl @Inject()(val regions: RegionStorage) extends RegionServ
   def getById(id: String): Option[Region] = regions.findById(id)
 
   def removeById(id: String): Unit = regions.removeById(id)
+
+  def getInZoneRegions(point: Location): Seq[Region] = {
+    val farRegion: (Region) => Boolean = { r =>
+      if (r.zone.isDefined) {
+        val z = r.zone.get
+        z.radius > z.center.distance(point)
+      } else false
+    }
+    this.all().filter(farRegion)
+  }
+
 }
 
 

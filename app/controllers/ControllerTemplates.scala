@@ -40,4 +40,17 @@ trait ControllerTemplates { controller: Controller =>
       }
     )
   }
+
+  def ParseRequestTemplate[Tin, Tout](f:(Tin => Tout))(implicit formatIn: Format[Tin], formatOut: Format[Tout]) = Action(BodyParsers.parse.json) { request =>
+    val validate = request.body.validate[Tin]
+    validate.fold(
+      errors => {
+        logger.error(errors.toString())
+        BadRequest(FailureRS)
+      },
+      obj => {
+        Ok(Json.toJson(f(obj)))
+      }
+    )
+  }
 }

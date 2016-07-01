@@ -1,5 +1,5 @@
 package services
-import model.Region
+import model.{Location, Region}
 
 trait RegionService {
 
@@ -10,4 +10,6 @@ trait RegionService {
   def getById(id: String): Option[Region]
 
   def removeById(id: String): Unit
+
+  def getInZoneRegions(point: Location): Seq[Region]
 }

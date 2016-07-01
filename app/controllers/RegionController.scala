@@ -2,7 +2,7 @@ package controllers
 
 import javax.inject.{Inject, Singleton}
 
-import model.Region
+import model.{Location, Region}
 import play.api.mvc._
 import services.RegionService
 
@@ -25,5 +25,9 @@ class RegionController @Inject()(val regions: RegionService) extends Controller 
 
   def getById(id: String) = ActionTemplate { request =>
     regions.getById(id)
+  }
+
+  def getInZoneRegions = ParseRequestTemplate { location: Location =>
+    regions.getInZoneRegions(location);
   }
 }
