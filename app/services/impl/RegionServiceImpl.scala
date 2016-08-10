@@ -21,6 +21,12 @@ class RegionServiceImpl @Inject()(val regions: RegionStorage) extends RegionServ
     RegionFormat.unapply(regionEntity)
   }
 
+  def update(id: String, region: Region): Region = {
+    val regionEntity: RegionEntity = RegionFormat.apply(region)
+    regions.update(id, regionEntity)
+    RegionFormat.unapply(regionEntity)
+  }
+
   def getById(id: String): Option[Region] = regions.findById(id)
 
   def removeById(id: String): Unit = regions.removeById(id)

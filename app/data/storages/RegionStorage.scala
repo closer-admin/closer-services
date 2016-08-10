@@ -8,7 +8,7 @@ trait RegionStorage {
 
   def insert(region: RegionEntity): Unit
 
-  def save(region: RegionEntity): Unit
+  def update(id: String, region: RegionEntity): Unit
 
   def removeById(id: String): Unit
 

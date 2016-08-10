@@ -11,6 +11,8 @@ trait MongoQueryAliaces {
 
   def $oid(id: String) = o(_id -> new ObjectId(id))
 
+  def $oid(id: ObjectId) = o(_id -> id)
+
   def $oid() = o(_id -> new ObjectId())
 
 }

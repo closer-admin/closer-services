@@ -2,12 +2,14 @@ package data.storages.impl
 
 import javax.inject.{Inject, Singleton}
 
+import com.mongodb.casbah.WriteConcern
 import com.novus.salat.dao.SalatDAO
 import com.novus.salat.global._
 import config._
 import data.entities.RegionEntity
 import data.storages.RegionStorage
 import data.storages.common.MongoQueryAliaces
+import org.bson.types.ObjectId
 
 @Singleton
 class RegionMongoStorage @Inject()(mongo: Mongo) extends RegionStorage with MongoQueryAliaces {
@@ -34,7 +36,16 @@ class RegionMongoStorage @Inject()(mongo: Mongo) extends RegionStorage with Mong
     dao.collection.remove(o.empty)
   }
 
-  override def save(region: RegionEntity): Unit = {
-    dao.save(region)
+  override def update(id: String, region: RegionEntity): Unit = {
+    dao.findOne($oid(id)) foreach { originRegion =>
+      val updatedRegion = RegionEntity(
+        new ObjectId(id),
+        region.name,
+        region.description,
+        region.zone,
+        originRegion.promotions
+      )
+      dao.update($oid(id), updatedRegion, false, false, WriteConcern.Normal)
+    }
   }
 }

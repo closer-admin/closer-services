@@ -7,6 +7,8 @@ trait RegionService {
 
   def save(region: Region): Region
 
+  def update(id: String, region: Region): Region
+
   def getById(id: String): Option[Region]
 
   def removeById(id: String): Unit

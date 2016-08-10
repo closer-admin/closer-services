@@ -6,6 +6,7 @@
 GET           /api/regions                                 @controllers.RegionController.all
 GET           /api/regions/:id                             @controllers.RegionController.getById(id)
 DELETE        /api/regions/:id                             @controllers.RegionController.removeById(id)
+PUT           /api/regions/:id                             @controllers.RegionController.update(id)
 POST          /api/regions                                 @controllers.RegionController.save
 POST          /api/regions/wraps                           @controllers.RegionController.getInZoneRegions
 

@@ -18,6 +18,10 @@ class RegionController @Inject()(val regions: RegionService) extends Controller 
     regions.save(region)
   }
 
+  def update(id: String) = SaveActionTemplate { region: Region =>
+    regions.update(id, region)
+  }
+
   def removeById(id: String) = ActionTemplate { request =>
     regions.removeById(id)
     SuccessRS
