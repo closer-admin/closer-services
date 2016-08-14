@@ -7,6 +7,7 @@ import play.api.libs.json._
 case class Promotion(
                       id: Option[String] = None,
                       serviceId: String,
+                      regionId: String,
                       promoCode: Option[String] = None,
                       media: Option[String] = None,
                       title: Option[String] = None,

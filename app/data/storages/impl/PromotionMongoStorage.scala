@@ -2,57 +2,38 @@ package data.storages.impl
 
 import javax.inject.{Inject, Singleton}
 
-import com.mongodb.casbah.query.Imports._
 import com.novus.salat.dao.SalatDAO
 import com.novus.salat.global._
-import com.novus.salat.grater
 import config._
-import data.entities.{PromotionEntity, RegionEntity}
+import data.entities.PromotionEntity
 import data.storages.PromotionStorage
 import data.storages.common.MongoQueryAliaces
 
 @Singleton
 class PromotionMongoStorage @Inject()(mongo: Mongo) extends PromotionStorage with MongoQueryAliaces {
 
-  object dao extends SalatDAO[RegionEntity, String](collection = mongo.mongodb("regions"))
+  val collection = "promotions"
+  val regionLink = "regionId"
 
-  val promotions = "promotions"
+  object dao extends SalatDAO[PromotionEntity, String](collection = mongo.mongodb(collection))
 
-  override def all(regionId: String)(): Seq[PromotionEntity] = {
-    dao.findOne($oid(regionId)) match {
-      case Some(region) => region.promotions.toSeq
-      case _ => Seq.empty
-    }
+  override def all(): Seq[PromotionEntity] = dao.find($o.empty).toSeq
+
+  override def allOfRegion(regionId: String): Seq[PromotionEntity] = {
+    dao.find($o(regionLink -> $id(regionId))).toSeq
   }
 
-  override def save(regionId: String)(promo: PromotionEntity): Unit = {
-    val promoObject: DBObject = grater[PromotionEntity].asDBObject(promo)
-    dao.update(
-      $oid(regionId),
-      $push(promotions -> promoObject)
-    )
+  override def save(promo: PromotionEntity): Unit = dao.insert(promo)
+
+  override def removeById(id: String): Unit = dao.remove($oid(id))
+
+  override def findById(id: String): Option[PromotionEntity] = dao.findOne($oid(id))
+
+  override def removeAll(): Unit = dao.remove($o.empty)
+
+  override def removeAllOfRegion(regionId: String): Unit = {
+    dao.collection.remove($o(regionLink -> $id(regionId)))
   }
 
-  override def removeById(regionId: String)(promoId: String): Unit = {
-    dao.update(
-      $oid(regionId),
-      $pull(promotions -> $oid(promoId))
-    )
-  }
 
-  override def findById(regionId: String)(promoId: String): Option[PromotionEntity] = {
-    dao.findOne($oid(regionId)) match {
-      case Some(region) => region.promotions.find {
-        _.id == promoId
-      }
-      case _ => None
-    }
-  }
-
-  override def removeAll(regionId: String)(): Unit = {
-    dao.update(
-      $oid(regionId),
-      $set(promotions -> Seq())
-    )
-  }
 }

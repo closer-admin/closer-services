@@ -1,1 +1,1 @@
-{"_id":{"$oid":"56b26adc4268d3818977b4b1"},"name":"Somerset House","description":"Neoclassical riverside palace hosting courtyard events, a winter ice rink and the Courtauld Gallery.","zone":{"center":{"latitude":51.5103323,"longitude":-0.1328457},"radius":100},"promotions":[]}
+{"_id":{"$oid":"56b26adc4268d3818977b4b1"},"name":"Somerset House","description":"Neoclassical riverside palace hosting courtyard events, a winter ice rink and the Courtauld Gallery.","zone":{"center":{"latitude":51.5103323,"longitude":-0.1328457},"radius":100}}

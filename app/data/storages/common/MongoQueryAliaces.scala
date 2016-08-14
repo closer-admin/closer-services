@@ -7,13 +7,15 @@ trait MongoQueryAliaces {
 
   val _id = "_id"
 
-  val o = MongoDBObject
+  val $o = MongoDBObject
 
-  def $oid(id: String) = o(_id -> new ObjectId(id))
+  def $id = new ObjectId()
 
-  def $oid(id: ObjectId) = o(_id -> id)
+  def $id(value: String) = new ObjectId(value)
 
-  def $oid() = o(_id -> new ObjectId())
+  def $oid(id: String) = $o(_id -> new ObjectId(id))
+
+  def $oid() = $o(_id -> new ObjectId())
 
 }
 

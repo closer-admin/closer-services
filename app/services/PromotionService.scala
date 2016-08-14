@@ -4,7 +4,9 @@ import model.Promotion
 
 trait PromotionService {
 
-  def all(regionId: String): Seq[Promotion]
+  def all(): Seq[Promotion]
+
+  def allOfRegion(regionId: String): Seq[Promotion]
 
   def save(regionId: String, promo: Promotion): Promotion
 

@@ -6,8 +6,7 @@ case class Region(
                    id: Option[String] = None,
                    name: String,
                    description: Option[String] = None,
-                   zone: Option[Zone] = None,
-                   promotions: Set[String] = Set.empty
+                   zone: Option[Zone] = None
                  )
 
 object Region {

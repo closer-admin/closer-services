@@ -23,8 +23,7 @@ object RegionFormat extends ConverionFormat[Region, RegionEntity] {
       id = Some(ObjectIdFormat.unapply(o.id)),
       name = o.name,
       description = o.description,
-      zone = ZoneFormat.unapply(o.zone),
-      promotions = o.promotions.map { promo => ObjectIdFormat.unapply(promo.id) }
+      zone = ZoneFormat.unapply(o.zone)
     )
   }
 }

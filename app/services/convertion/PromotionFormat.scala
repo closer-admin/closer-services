@@ -13,6 +13,7 @@ object PromotionFormat extends ConverionFormat[Promotion, PromotionEntity] {
         case None => new ObjectId()
       },
       serviceId = ObjectIdFormat.apply(o.serviceId),
+      regionId = ObjectIdFormat.apply(o.regionId),
       promoCode = o.promoCode,
       media = o.media,
       title = o.title,
@@ -27,6 +28,7 @@ object PromotionFormat extends ConverionFormat[Promotion, PromotionEntity] {
     Promotion(
       id = Some(ObjectIdFormat.unapply(o.id)),
       serviceId = ObjectIdFormat.unapply(o.serviceId),
+      regionId = ObjectIdFormat.unapply(o.regionId),
       promoCode = o.promoCode,
       media = o.media,
       title = o.title,

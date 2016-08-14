@@ -17,7 +17,7 @@ class RegionServiceImpl @Inject()(val regions: RegionStorage) extends RegionServ
 
   def save(region: Region): Region = {
     val regionEntity: RegionEntity = RegionFormat.apply(region)
-    regions.insert(regionEntity)
+    regions.save(regionEntity)
     RegionFormat.unapply(regionEntity)
   }
 

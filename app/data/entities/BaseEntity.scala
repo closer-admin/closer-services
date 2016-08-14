@@ -3,13 +3,7 @@ package data.entities
 import com.novus.salat.annotations._
 import org.bson.types.ObjectId
 
-
-case class RegionEntity(
-                         @Key("_id") id: ObjectId,
-                         name: String,
-                         description: Option[String] = None,
-                         zone: Option[ZoneEntity] = None
-                       ) {
+case class BaseEntity(@Key("_id") id: ObjectId) {
 
   override def hashCode(): Int = {
     val prime = 31
@@ -25,4 +19,3 @@ case class RegionEntity(
     }
   }
 }
-

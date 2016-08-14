@@ -9,8 +9,12 @@ import services.PromotionService
 @Singleton
 class PromotionController @Inject()(val promotions: PromotionService) extends Controller with ControllerTemplates {
 
-  def all(regionId: String) = ActionTemplate { request =>
-    promotions.all(regionId)
+  def all = ActionTemplate { request =>
+    promotions.all()
+  }
+
+  def allOfRegion(regionId: String) = ActionTemplate { request =>
+    promotions.allOfRegion(regionId)
   }
 
   def save(regionId: String) = SaveActionTemplate { promo: Promotion =>

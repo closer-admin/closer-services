@@ -8,30 +8,34 @@ trait PromotionStorage {
 
   def of(regionId: String): RegionPromotions = new RegionPromotions(regionId)
 
-  def of(regionId: ObjectId): RegionPromotions = new RegionPromotions(regionId.toHexString)
+  def of(regionId: ObjectId): RegionPromotions = new RegionPromotions(regionId.toString)
 
-  def all(regionId: String)(): Seq[PromotionEntity]
+  def all(): Seq[PromotionEntity]
 
-  def save(regionId: String)(promo: PromotionEntity): Unit
+  def allOfRegion(regionId: String): Seq[PromotionEntity]
 
-  def removeById(regionId: String)(id: String): Unit
+  def save(promo: PromotionEntity): Unit
 
-  def findById(regionId: String)(id: String): Option[PromotionEntity]
+  def removeById(id: String): Unit
 
-  def removeAll(regionId: String)(): Unit
+  def findById(id: String): Option[PromotionEntity]
+
+  def removeAll(): Unit
+
+  def removeAllOfRegion(regionId: String): Unit
 
 
   class RegionPromotions(val regionId: String) {
 
-    def all() = self.all(regionId): Seq[PromotionEntity]
+    def all() = self.allOfRegion(regionId): Seq[PromotionEntity]
 
-    def save(promo: PromotionEntity): Unit = self.save(regionId)(promo)
+    def save(promo: PromotionEntity): Unit = self.save(promo)
 
-    def removeById(id: String): Unit = self.removeById(regionId)(id)
+    def removeById(id: String): Unit = self.removeById(id)
 
-    def findById(id: String): Option[PromotionEntity] = self.findById(regionId)(id)
+    def findById(id: String): Option[PromotionEntity] = self.findById(id)
 
-    def removeAll(): Unit = self.removeAll(regionId)
+    def removeAll(): Unit = self.removeAllOfRegion(regionId)
   }
 
 }

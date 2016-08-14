@@ -13,7 +13,9 @@ class PromotionServiceImpl @Inject()(val promotions: PromotionStorage) extends P
 
   import PromotionFormat._
 
-  override def all(regionId: String): Seq[Promotion] = promotions.of(regionId).all()
+  override def all(): Seq[Promotion] = promotions.all()
+
+  override def allOfRegion(regionId: String): Seq[Promotion] = promotions.of(regionId).all()
 
   override def removeById(regionId: String, id: String): Unit = promotions.of(regionId).removeById(id)
 
@@ -24,6 +26,7 @@ class PromotionServiceImpl @Inject()(val promotions: PromotionStorage) extends P
     promotions.of(regionId).save(promoEntity)
     PromotionFormat.unapply(promoEntity)
   }
+
 }
 
 
