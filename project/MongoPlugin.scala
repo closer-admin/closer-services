@@ -1,6 +1,7 @@
 import CommonUtils._
 import sbt._
 
+
 object MongoPlugin extends AutoPlugin {
   import MongoUtils._
 
@@ -9,14 +10,15 @@ object MongoPlugin extends AutoPlugin {
     lazy val mongoimportSetting = settingKey[(String, String) => String]("Import to MongoDB. Depends on 'env' variable ")
     lazy val mongoexportSetting = settingKey[(String, String) => String]("Export to MongoDB. Depends on 'env' variable ")
 
-    lazy val mongoDrop = taskKey[Unit]("Print all rows in test collection")
-    lazy val mongoImport = taskKey[Unit]("Import testdata.json to mongo")
-    lazy val mongoExport = taskKey[Unit]("Export testdata.json to mongo")
+    lazy val mongoDrop = inputKey[Unit]("Print all rows in test collection")
+    lazy val mongoImport = inputKey[Unit]("Import testdata.json to mongo")
+    lazy val mongoExport = inputKey[Unit]("Export testdata.json to mongo")
   }
 
   import autoImport._
+  import complete.DefaultParsers._
 
-  val collection = $("mongo.collection")
+  val parser = Space ~ StringBasic
 
   lazy val mongoSettings: Seq[Def.Setting[_]] = Seq(
     mongoSetting := {
@@ -59,18 +61,22 @@ object MongoPlugin extends AutoPlugin {
       }
     },
     mongoDrop := {
+      val collection = parser.parsed._2
       val mongo = mongoSetting.value
       val command = mongo apply s"db.${collection}.drop()"
       println(command)
       println(command !!)
     },
-    mongoImport := {
+
+  mongoImport := {
+      val collection = parser.parsed._2
       val mongoimport = mongoimportSetting.value
       val command = mongoimport apply(collection, s"testdata/${collection}.json")
       println(command)
       println(command !!)
     },
     mongoExport := {
+      val collection = parser.parsed._2
       val mongoexport = mongoexportSetting.value
       val command = mongoexport apply(collection, s"testdata/${collection}.json")
       println(command)
