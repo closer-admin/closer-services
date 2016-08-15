@@ -4,10 +4,11 @@ import com.novus.salat.annotations._
 import org.bson.types.ObjectId
 
 
-case class RegionEntity (
+case class CompanyEntity(
                          @Key("_id") id: ObjectId,
                          name: String,
                          description: Option[String] = None,
-                         zone: Option[ZoneEntity] = None
+                         contactDetails: Option[ContactDetailsEntity] = None,
+                         services: Set[ServiceEntity] = Set.empty
                        ) extends BaseEntity
 

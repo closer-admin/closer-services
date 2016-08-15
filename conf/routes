@@ -10,8 +10,15 @@ PUT           /api/regions/:id                             @controllers.RegionCo
 POST          /api/regions                                 @controllers.RegionController.save
 POST          /api/regions/wraps                           @controllers.RegionController.getInZoneRegions
 
+# Companies
+GET           /api/companies                               @controllers.CompanyController.all
+GET           /api/companies/:id                           @controllers.CompanyController.getById(id)
+DELETE        /api/companies/:id                           @controllers.CompanyController.removeById(id)
+PUT           /api/companies/:id                           @controllers.CompanyController.update(id)
+POST          /api/companies                               @controllers.CompanyController.save
+
 # Promotions
-GET           /api/promotions                      @controllers.PromotionController.all
+GET           /api/promotions                              @controllers.PromotionController.all
 GET           /api/regions/:regionId/promotions            @controllers.PromotionController.allOfRegion(regionId)
 GET           /api/regions/:regionId/promotions/:id        @controllers.PromotionController.getById(regionId, id)
 DELETE        /api/regions/:regionId/promotions/:id        @controllers.PromotionController.removeById(regionId, id)

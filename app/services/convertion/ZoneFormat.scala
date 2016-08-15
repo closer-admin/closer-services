@@ -3,7 +3,7 @@ package services.convertion
 import data.entities.ZoneEntity
 import model.Zone
 
-object ZoneFormat extends ConverionFormat[Zone, ZoneEntity]{
+object ZoneFormat extends ConversionFormat[Zone, ZoneEntity]{
 
   override implicit def apply(o: Zone): ZoneEntity = ZoneEntity(
     LocationFormat.apply(o.center),

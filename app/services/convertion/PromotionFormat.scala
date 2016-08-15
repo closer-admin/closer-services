@@ -4,14 +4,11 @@ import data.entities.PromotionEntity
 import model.Promotion
 import org.bson.types.ObjectId
 
-object PromotionFormat extends ConverionFormat[Promotion, PromotionEntity] {
+object PromotionFormat extends ConversionFormat[Promotion, PromotionEntity] {
 
   override implicit def apply(o: Promotion): PromotionEntity = {
     PromotionEntity(
-      id = ObjectIdFormat.apply(o.id) match {
-        case Some(id) => id
-        case None => new ObjectId()
-      },
+      id = ObjectIdFormat.applyFromOpt(o.id),
       serviceId = ObjectIdFormat.apply(o.serviceId),
       regionId = ObjectIdFormat.apply(o.regionId),
       promoCode = o.promoCode,
@@ -26,7 +23,7 @@ object PromotionFormat extends ConverionFormat[Promotion, PromotionEntity] {
 
   override implicit def unapply(o: PromotionEntity): Promotion = {
     Promotion(
-      id = Some(ObjectIdFormat.unapply(o.id)),
+      id = ObjectIdFormat.unapplyToOpt(o.id),
       serviceId = ObjectIdFormat.unapply(o.serviceId),
       regionId = ObjectIdFormat.unapply(o.regionId),
       promoCode = o.promoCode,

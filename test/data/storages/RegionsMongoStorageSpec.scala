@@ -22,7 +22,7 @@ class RegionsMongoStorageSpec extends FlatSpec with Matchers with BeforeAndAfter
     regions.all should have size 1
   }
 
-  "save()" should "store Region in DB without exceptions" in new LocalMongo {
+  "insert()" should "store Region in DB without exceptions" in new LocalMongo {
     regions.save(someRegion)
   }
 

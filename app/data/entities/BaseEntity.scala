@@ -1,9 +1,9 @@
 package data.entities
 
-import com.novus.salat.annotations._
 import org.bson.types.ObjectId
 
-case class BaseEntity(@Key("_id") id: ObjectId) {
+abstract class BaseEntity() {
+  def id: ObjectId
 
   override def hashCode(): Int = {
     val prime = 31

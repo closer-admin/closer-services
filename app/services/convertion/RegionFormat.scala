@@ -4,14 +4,11 @@ import data.entities.RegionEntity
 import model.Region
 import org.bson.types.ObjectId
 
-object RegionFormat extends ConverionFormat[Region, RegionEntity] {
+object RegionFormat extends ConversionFormat[Region, RegionEntity] {
 
   override implicit def apply(o: Region): RegionEntity = {
     RegionEntity(
-      id = ObjectIdFormat.apply(o.id) match {
-        case Some(id) => id
-        case None => new ObjectId()
-      },
+      id = ObjectIdFormat.applyFromOpt(o.id),
       name = o.name,
       description = o.description,
       zone = ZoneFormat.apply(o.zone)
@@ -20,7 +17,7 @@ object RegionFormat extends ConverionFormat[Region, RegionEntity] {
 
   override implicit def unapply(o: RegionEntity): Region = {
     Region(
-      id = Some(ObjectIdFormat.unapply(o.id)),
+      id = ObjectIdFormat.unapplyToOpt(o.id),
       name = o.name,
       description = o.description,
       zone = ZoneFormat.unapply(o.zone)
