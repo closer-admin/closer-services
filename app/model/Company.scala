@@ -6,8 +6,7 @@ case class Company(
                    id: Option[String] = None,
                    name: String,
                    description: Option[String] = None,
-                   contactDetails: Option[ContactDetails] = None,
-                   services: Set[Service] = Set.empty
+                   contactDetails: Option[ContactDetails] = None
                  )
 
 object Company {

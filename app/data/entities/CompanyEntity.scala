@@ -8,7 +8,6 @@ case class CompanyEntity(
                          @Key("_id") id: ObjectId,
                          name: String,
                          description: Option[String] = None,
-                         contactDetails: Option[ContactDetailsEntity] = None,
-                         services: Set[ServiceEntity] = Set.empty
+                         contactDetails: Option[ContactDetailsEntity] = None
                        ) extends BaseEntity
 

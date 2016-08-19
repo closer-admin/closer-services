@@ -16,6 +16,8 @@ trait PromotionStorage {
 
   def save(promo: PromotionEntity): Unit
 
+  def update(id: String, promotion: PromotionEntity): Unit
+
   def removeById(id: String): Unit
 
   def findById(id: String): Option[PromotionEntity]

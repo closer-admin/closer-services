@@ -10,8 +10,7 @@ object CompanyFormat extends ConversionFormat[Company, CompanyEntity] {
       id = ObjectIdFormat.applyFromOpt(o.id),
       name = o.name,
       description = o.description,
-      contactDetails = ContactDetailsFormat.apply(o.contactDetails),
-      services = ServiceFormat.apply(o.services)
+      contactDetails = ContactDetailsFormat.apply(o.contactDetails)
     )
   }
 
@@ -20,8 +19,7 @@ object CompanyFormat extends ConversionFormat[Company, CompanyEntity] {
       id = ObjectIdFormat.unapplyToOpt(o.id),
       name = o.name,
       description = o.description,
-      contactDetails = ContactDetailsFormat.unapply(o.contactDetails),
-      services = ServiceFormat.unapply(o.services)
+      contactDetails = ContactDetailsFormat.unapply(o.contactDetails)
     )
   }
 }

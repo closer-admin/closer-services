@@ -21,12 +21,17 @@ class PromotionController @Inject()(val promotions: PromotionService) extends Co
         promotions.save(regionId, promo)
   }
 
-  def removeById(regionId: String, id: String) = ActionTemplate { request =>
-    promotions.removeById(regionId, id)
+  def removeById(id: String) = ActionTemplate { request =>
+    promotions.removeById(id)
     SuccessRS
   }
 
-  def getById(regionId: String, id: String) = ActionTemplate { request =>
-    promotions.getById(regionId, id)
+  def getById(id: String) = ActionTemplate { request =>
+    promotions.getById(id)
   }
+
+  def update(id: String) = SaveActionTemplate { promotion: Promotion=>
+    promotions.update(id, promotion)
+  }
+
 }

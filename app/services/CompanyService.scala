@@ -1,6 +1,6 @@
 package services
 
-import model.{Location, Company}
+import model.Company
 
 trait CompanyService {
 

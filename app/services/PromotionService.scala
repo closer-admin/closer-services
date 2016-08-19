@@ -10,8 +10,10 @@ trait PromotionService {
 
   def save(regionId: String, promo: Promotion): Promotion
 
-  def getById(regionId: String, id: String): Option[Promotion]
+  def getById(id: String): Option[Promotion]
 
-  def removeById(regionId: String, id: String): Unit
+  def removeById(id: String): Unit
+
+  def update(id: String, promotion: Promotion): Promotion
   
 }

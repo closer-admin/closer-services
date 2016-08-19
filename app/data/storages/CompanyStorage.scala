@@ -6,9 +6,9 @@ trait CompanyStorage {
 
   def all(): Seq[CompanyEntity]
 
-  def save(region: CompanyEntity): Unit
+  def save(company: CompanyEntity): Unit
 
-  def update(id: String, region: CompanyEntity): Unit
+  def update(id: String, company: CompanyEntity): Unit
 
   def removeById(id: String): Unit
 

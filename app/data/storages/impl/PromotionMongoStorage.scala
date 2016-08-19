@@ -2,10 +2,11 @@ package data.storages.impl
 
 import javax.inject.{Inject, Singleton}
 
+import com.mongodb.casbah.WriteConcern
 import com.novus.salat.dao.SalatDAO
 import com.novus.salat.global._
 import config._
-import data.entities.PromotionEntity
+import data.entities.{PromotionEntity, RegionEntity}
 import data.storages.PromotionStorage
 import data.storages.common.MongoQueryAliaces
 
@@ -33,6 +34,14 @@ class PromotionMongoStorage @Inject()(mongo: Mongo) extends PromotionStorage wit
 
   override def removeAllOfRegion(regionId: String): Unit = {
     dao.collection.remove($o(regionLink -> $id(regionId)))
+  }
+
+  override def update(id: String, promotion: PromotionEntity): Unit = {
+    val upsert: Boolean = false
+    val multi: Boolean = false
+    dao.findOne($oid(id)) foreach { originRegion =>
+      dao.update($oid(id), promotion, upsert, multi, WriteConcern.Normal)
+    }
   }
 
 
