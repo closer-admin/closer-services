@@ -63,23 +63,33 @@ sbt stage deployHeroku
 
 ## SERVICES:
 ### Regions:
+
 - `GET::/api/regions` - Get all Regions
 - `GET::/api/regions/:id` - Get Region by ID
 - `DELETE::/api/regions/:id` - Delete Region by ID
-- `POST::/api/regions` - Save or Update Region
-- `POST::/api/regions/wraps` - Return all regions that wrap sent point.
+- `PUT::/api/regions/:id` - Update Region
+- `POST::/api/regions` - Save Region
+- `POST::/api/regions/cover` - Return all regions that cover sent point.
 
 ```
-// Example of Location RQ object that should be sent to  /api/regions/wraps endpoint
+// Example of Location RQ object that should be sent to  /api/regions/cover endpoint
 {
     "latitude": 53.9298819,
     "longitude": 27.5772205
 }
 ```
 
-
 ### Promotions:
+- `GET::/api/promotions` - Get all Promotions
 - `GET::/api/regions/:regionId/promotions` - Get all Promotions of particular Region
-- `GET::/api/regions/:regionId/promotions/:id` - Get Promotion by ID
-- `DELETE::/api/regions/:regionId/promotions/:id` - Delete Promotion by ID
-- `POST::/api/regions/:regionId/promotions` - Save or Update Promotion
+- `GET::/api/promotions/:id` - Get Promotion by ID
+- `DELETE::/api/promotions/:id` - Delete Promotion by ID
+- `PUT::/api/promotions/:id` - Update Promotion
+- `POST::/api/promotions` - Save Promotion
+
+### ServiceProviders:
+- `GET::/api/providers` - Get all Providers
+- `GET::/api/providers/:id` - Get Provider by ID
+- `DELETE::/api/providers/:id` - Delete Provider by ID
+- `PUT::/api/providers/:id` - Update Provider
+- `POST::/api/providers` - Save Provider
