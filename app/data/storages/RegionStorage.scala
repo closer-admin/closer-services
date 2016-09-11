@@ -6,7 +6,7 @@ trait RegionStorage {
 
   def all(): Seq[RegionEntity]
 
-  def insert(region: RegionEntity): Unit
+  def save(region: RegionEntity): Unit
 
   def update(id: String, region: RegionEntity): Unit
 

@@ -3,7 +3,7 @@ package services.convertion
 import data.entities.LocationEntity
 import model.Location
 
-object LocationFormat extends ConverionFormat[Location, LocationEntity]{
+object LocationFormat extends ConversionFormat[Location, LocationEntity]{
 
   override implicit def apply(o: Location): LocationEntity = LocationEntity(
     o.latitude,

@@ -1,6 +1,6 @@
 package services.convertion
 
-trait ConverionFormat [A, B] {
+trait ConversionFormat [A, B] {
 
   implicit def apply(o: A):B
   implicit def apply(seq: Seq[A]):Seq[B] = seq.map(apply(_))

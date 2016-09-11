@@ -27,7 +27,6 @@ To use plugin firstly need to run SBT with appropriate config file.
 Plugin use following properties from config:
 
 ```
-mongo.collection = ...
 mongo.user = ...
 mongo.password = ...
 mongo.host = ...
@@ -35,22 +34,21 @@ mongo.port = ...
 mongo.dbname = ...
 ```
 
-Name of collection should be the same as name of json file with test data in folder "testdata", ie:
-
-```
-mongo.collection = "regions"
-...
-testdata/regions.json
-```
-
 Plugin define following tasks:
 
 ```
-mongoDrop // Drop ${mongo.collection}
-mongoImport // Import data from testdata/${mongo.collection}.json to collection ${mongo.collection}
-mongoExport // Export data from collection ${mongo.collection} to testdata/${mongo.collection}.json
+mongoDrop ${collection} // Drop ${collection}
+mongoImport ${collection} // Import data from testdata/${collection}.json to collection ${collection}
+mongoExport ${collection} // Export data from collection ${collection} to testdata/${collection}.json
 ```
 
+Name of collection should be the same as name of json file with test data in folder "testdata", ie:
+
+```
+collection = "regions"
+...
+testdata/regions.json
+```
 
 ## HEROKU:
 ### Deploying application

@@ -17,20 +17,20 @@ class RegionsMongoStorageSpec extends FlatSpec with Matchers with BeforeAndAfter
   }
 
   "all()" should "return one saved region" in new LocalMongo {
-    regions.insert(someRegion)
+    regions.save(someRegion)
 
     regions.all should have size 1
   }
 
   "insert()" should "store Region in DB without exceptions" in new LocalMongo {
-    regions.insert(someRegion)
+    regions.save(someRegion)
   }
 
   "findById()" should "return previously stored Region by ID" in new LocalMongo {
     val region = someRegion
     val regionId = region.id.toHexString
 
-    regions.insert(region)
+    regions.save(region)
 
     regions.findById(regionId) should be equals region
   }
@@ -39,7 +39,7 @@ class RegionsMongoStorageSpec extends FlatSpec with Matchers with BeforeAndAfter
     val region = someRegion
     val regionId: String = region.id.toHexString
 
-    regions.insert(region)
+    regions.save(region)
     regions.removeById(regionId)
 
     regions.findById(regionId) should be equals None

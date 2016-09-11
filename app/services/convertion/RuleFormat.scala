@@ -3,7 +3,7 @@ package services.convertion
 import data.entities.RuleEntity
 import model.Rule
 
-object RuleFormat extends ConverionFormat[Rule, RuleEntity]{
+object RuleFormat extends ConversionFormat[Rule, RuleEntity]{
 
   override implicit def apply(o: Rule): RuleEntity = RuleEntity(
     description = o.description

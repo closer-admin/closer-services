@@ -6,44 +6,34 @@ import org.scalatest._
 
 class PromotionsMongoStorageSpec extends FlatSpec with Matchers with BeforeAndAfter with BeforeAndAfterAll with LocalMongo {
 
-  val regionId = someOID
+  val regionId = new ObjectId()
   val promotions = injector.instanceOf[PromotionStorage]
 
-  override def beforeAll() {
-    val regions = injector.instanceOf[RegionStorage]
-    regions.removeAll()
-    regions.insert(RegionEntity(
-      id = regionId,
-      name = someRegionName
-    ))
-  }
-
-
   before {
-    promotions.of(regionId).removeAll()
+    promotions.removeAll()
   }
 
   override def afterAll() {
-    promotions.of(regionId).removeAll()
+    promotions.removeAll()
   }
 
 
   "all()" should "fetch 1 Promotion after it was stored there" in new LocalMongo {
     val regionalPromotions = promotions.of(regionId)
 
-    regionalPromotions.save(somePromotion)
+    regionalPromotions.save(somePromotion(regionId))
 
     regionalPromotions.all() should have size 1
   }
 
-  "insert()" should "should store Promotion object without throwing exception" in new LocalMongo {
-    promotions.of(regionId).save(somePromotion)
+  "save()" should "should store Promotion object without throwing exception" in new LocalMongo {
+    promotions.of(regionId).save(somePromotion())
   }
 
   "findById()" should "find previously stored Promotion" in new LocalMongo {
     val regionalPromotions = promotions.of(regionId)
-    val promotion = somePromotion
-    val promotionId = promotion.id.toHexString
+    val promotion = somePromotion()
+    val promotionId = promotion.id.toString
 
     regionalPromotions.save(promotion)
 
@@ -52,7 +42,7 @@ class PromotionsMongoStorageSpec extends FlatSpec with Matchers with BeforeAndAf
 
   "removeById()" should "remove by ID previously stored Promotion" in new LocalMongo {
     val regionalPromotions = promotions.of(regionId)
-    val promotion = somePromotion
+    val promotion = somePromotion()
     val promotionId = promotion.id.toHexString
 
     regionalPromotions.save(promotion)
@@ -65,8 +55,9 @@ class PromotionsMongoStorageSpec extends FlatSpec with Matchers with BeforeAndAf
 
   def someOID = new ObjectId()
 
-  def somePromotion: PromotionEntity = PromotionEntity(
+  def somePromotion(regionOID: ObjectId = someOID): PromotionEntity = PromotionEntity(
     id = someOID,
+    regionId = regionOID,
     serviceId = someOID
   )
 }

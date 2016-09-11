@@ -9,43 +9,29 @@ import config._
 import data.entities.RegionEntity
 import data.storages.RegionStorage
 import data.storages.common.MongoQueryAliaces
-import org.bson.types.ObjectId
 
 @Singleton
 class RegionMongoStorage @Inject()(mongo: Mongo) extends RegionStorage with MongoQueryAliaces {
 
-  object dao extends SalatDAO[RegionEntity, String](collection = mongo.mongodb("regions"))
+  private val collection: String = "regions"
 
-  override def all(): Seq[RegionEntity] = {
-    dao.find(o.empty).toSeq
-  }
+  object dao extends SalatDAO[RegionEntity, String](collection = mongo.mongodb(collection))
 
-  override def insert(region: RegionEntity): Unit = {
-    dao.insert(region)
-  }
+  override def all(): Seq[RegionEntity] = dao.find($o.empty).toSeq
 
-  override def removeById(id: String): Unit = {
-    dao.remove($oid(id))
-  }
+  override def save(region: RegionEntity): Unit = dao.insert(region)
 
-  override def findById(id: String): Option[RegionEntity] = {
-    dao.findOne($oid(id))
-  }
+  override def removeById(id: String): Unit = dao.remove($oid(id))
 
-  override def removeAll(): Unit ={
-    dao.collection.remove(o.empty)
-  }
+  override def findById(id: String): Option[RegionEntity] = dao.findOne($oid(id))
+
+  override def removeAll(): Unit = dao.collection.remove($o.empty)
 
   override def update(id: String, region: RegionEntity): Unit = {
+    val upsert: Boolean = false
+    val multi: Boolean = false
     dao.findOne($oid(id)) foreach { originRegion =>
-      val updatedRegion = RegionEntity(
-        new ObjectId(id),
-        region.name,
-        region.description,
-        region.zone,
-        originRegion.promotions
-      )
-      dao.update($oid(id), updatedRegion, false, false, WriteConcern.Normal)
+      dao.update($oid(id), region, upsert, multi, WriteConcern.Normal)
     }
   }
 }

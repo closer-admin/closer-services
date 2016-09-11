@@ -10,11 +10,27 @@ PUT           /api/regions/:id                             @controllers.RegionCo
 POST          /api/regions                                 @controllers.RegionController.save
 POST          /api/regions/wraps                           @controllers.RegionController.getInZoneRegions
 
+# Companies
+GET           /api/companies                               @controllers.CompanyController.all
+GET           /api/companies/:id                           @controllers.CompanyController.getById(id)
+DELETE        /api/companies/:id                           @controllers.CompanyController.removeById(id)
+PUT           /api/companies/:id                           @controllers.CompanyController.update(id)
+POST          /api/companies                               @controllers.CompanyController.save
+
+# ServiceProviders
+GET           /api/providers                               @controllers.ServiceProviderController.all
+GET           /api/providers/:id                           @controllers.ServiceProviderController.getById(id)
+DELETE        /api/providers/:id                           @controllers.ServiceProviderController.removeById(id)
+PUT           /api/providers/:id                           @controllers.ServiceProviderController.update(id)
+POST          /api/providers                               @controllers.ServiceProviderController.save
+
 # Promotions
-GET           /api/regions/:regionId/promotions            @controllers.PromotionController.all(regionId)
-GET           /api/regions/:regionId/promotions/:id        @controllers.PromotionController.getById(regionId, id)
-DELETE        /api/regions/:regionId/promotions/:id        @controllers.PromotionController.removeById(regionId, id)
-POST          /api/regions/:regionId/promotions            @controllers.PromotionController.save(regionId)
+GET           /api/promotions                              @controllers.PromotionController.all
+GET           /api/promotions/:id                          @controllers.PromotionController.getById(id)
+DELETE        /api/promotions/:id                          @controllers.PromotionController.removeById(id)
+PUT           /api/promotions/:id                          @controllers.PromotionController.update(id)
+POST          /api/promotions                              @controllers.PromotionController.save(regionId)
+GET           /api/regions/:regionId/promotions            @controllers.PromotionController.allOfRegion(regionId)
 
 # Map static resources from the /public folder to the /assets URL path
 GET           /assets/*file                                controllers.Assets.versioned(path="/public", file)
