@@ -9,6 +9,7 @@ object ServiceProviderFormat extends ConversionFormat[ServiceProvider, ServicePr
     ServiceProviderEntity(
       id = ObjectIdFormat.applyFromOpt(o.id),
       regionId = ObjectIdFormat.apply(o.regionId),
+      profileId = o.profileId,
       name = o.name,
       businessCategory = o.businessCategory,
       registerDetails = PersonDetailsFormat.apply(o.registerDetails),
@@ -21,6 +22,7 @@ object ServiceProviderFormat extends ConversionFormat[ServiceProvider, ServicePr
     ServiceProvider(
       id = ObjectIdFormat.unapplyToOpt(o.id),
       regionId = ObjectIdFormat.unapply(o.regionId),
+      profileId = o.profileId,
       name = o.name,
       businessCategory = o.businessCategory,
       registerDetails = PersonDetailsFormat.unapply(o.registerDetails),

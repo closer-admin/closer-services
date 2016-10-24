@@ -29,4 +29,8 @@ class ServiceProviderController @Inject()(val services: ServiceProviderService) 
   def getById(id: String) = ActionTemplate { request =>
     services.getById(id)
   }
+
+  def getByProfileId(profileId: String) = ActionTemplate { request =>
+    services.getPyProfileId(profileId)
+  }
 }

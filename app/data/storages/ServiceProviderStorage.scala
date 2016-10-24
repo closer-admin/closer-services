@@ -14,6 +14,8 @@ trait ServiceProviderStorage {
 
   def findById(id: String): Option[ServiceProviderEntity]
 
+  def findByProfileId(id: String): Option[ServiceProviderEntity]
+
   def removeAll(): Unit
 
 }

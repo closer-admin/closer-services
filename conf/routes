@@ -19,6 +19,7 @@ POST          /api/companies                               @controllers.CompanyC
 
 # ServiceProviders
 GET           /api/providers                               @controllers.ServiceProviderController.all
+GET           /api/providers/q                             @controllers.ServiceProviderController.getByProfileId(profileId)
 GET           /api/providers/:id                           @controllers.ServiceProviderController.getById(id)
 DELETE        /api/providers/:id                           @controllers.ServiceProviderController.removeById(id)
 PUT           /api/providers/:id                           @controllers.ServiceProviderController.update(id)
@@ -26,6 +27,7 @@ POST          /api/providers                               @controllers.ServiceP
 
 # Promotions
 GET           /api/promotions                              @controllers.PromotionController.all
+GET           /api/promotions/q                            @controllers.PromotionController.getByServiceId(serviceId)
 GET           /api/promotions/:id                          @controllers.PromotionController.getById(id)
 DELETE        /api/promotions/:id                          @controllers.PromotionController.removeById(id)
 PUT           /api/promotions/:id                          @controllers.PromotionController.update(id)

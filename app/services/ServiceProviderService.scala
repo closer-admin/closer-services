@@ -12,5 +12,7 @@ trait ServiceProviderService {
 
   def getById(id: String): Option[ServiceProvider]
 
+  def getPyProfileId(id: String): Option[ServiceProvider]
+
   def removeById(id: String): Unit
 }
