@@ -14,6 +14,7 @@ import data.storages.common.MongoQueryAliaces
 class ServiceProviderMongoStorage @Inject()(mongo: Mongo) extends ServiceProviderStorage with MongoQueryAliaces {
 
   private val collection: String = "services"
+  private val profileLink: String = "profileId"
 
   object dao extends SalatDAO[ServiceProviderEntity, String](collection = mongo.mongodb(collection))
 
@@ -24,6 +25,8 @@ class ServiceProviderMongoStorage @Inject()(mongo: Mongo) extends ServiceProvide
   override def removeById(id: String): Unit = dao.remove($oid(id))
 
   override def findById(id: String): Option[ServiceProviderEntity] = dao.findOne($oid(id))
+
+  override def findByProfileId(id: String): Option[ServiceProviderEntity] = dao.findOne($o(profileLink -> id))
 
   override def removeAll(): Unit = dao.collection.remove($o.empty)
 

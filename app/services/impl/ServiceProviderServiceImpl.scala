@@ -29,6 +29,8 @@ class ServiceProviderServiceImpl @Inject()(val services: ServiceProviderStorage)
 
   def getById(id: String): Option[ServiceProvider] = services.findById(id)
 
+  def getPyProfileId(id: String): Option[ServiceProvider] = services.findByProfileId(id)
+
   def removeById(id: String): Unit = services.removeById(id)
 }
 

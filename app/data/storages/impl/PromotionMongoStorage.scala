@@ -15,6 +15,7 @@ class PromotionMongoStorage @Inject()(mongo: Mongo) extends PromotionStorage wit
 
   val collection = "promotions"
   val regionLink = "regionId"
+  val serviceLink = "serviceId"
 
   object dao extends SalatDAO[PromotionEntity, String](collection = mongo.mongodb(collection))
 
@@ -30,6 +31,8 @@ class PromotionMongoStorage @Inject()(mongo: Mongo) extends PromotionStorage wit
 
   override def findById(id: String): Option[PromotionEntity] = dao.findOne($oid(id))
 
+  override def findByServiceId(id: String): Seq[PromotionEntity] = dao.find($o(serviceLink -> $id(id))).toSeq
+
   override def removeAll(): Unit = dao.remove($o.empty)
 
   override def removeAllOfRegion(regionId: String): Unit = {
@@ -43,6 +46,4 @@ class PromotionMongoStorage @Inject()(mongo: Mongo) extends PromotionStorage wit
       dao.update($oid(id), promotion, upsert, multi, WriteConcern.Normal)
     }
   }
-
-
 }

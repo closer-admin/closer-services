@@ -30,6 +30,10 @@ class PromotionController @Inject()(val promotions: PromotionService) extends Co
     promotions.getById(id)
   }
 
+  def getByServiceId(serviceId: String) = ActionTemplate { request =>
+    promotions.getByServiceId(serviceId)
+  }
+
   def update(id: String) = SaveActionTemplate { promotion: Promotion=>
     promotions.update(id, promotion)
   }

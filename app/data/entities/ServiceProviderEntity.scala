@@ -6,6 +6,7 @@ import org.bson.types.ObjectId
 case class ServiceProviderEntity(
                           @Key("_id") id: ObjectId,
                           regionId: ObjectId,
+                          profileId: String,
                           name: String,
                           businessCategory: Option[String] = None,
                           addressDetails: AddressDetailsEntity,

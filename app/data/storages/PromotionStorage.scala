@@ -22,6 +22,8 @@ trait PromotionStorage {
 
   def findById(id: String): Option[PromotionEntity]
 
+  def findByServiceId(id: String): Seq[PromotionEntity]
+
   def removeAll(): Unit
 
   def removeAllOfRegion(regionId: String): Unit

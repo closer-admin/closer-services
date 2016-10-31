@@ -12,6 +12,8 @@ trait PromotionService {
 
   def getById(id: String): Option[Promotion]
 
+  def getByServiceId(id: String): Seq[Promotion]
+
   def removeById(id: String): Unit
 
   def update(id: String, promotion: Promotion): Promotion
