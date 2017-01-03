@@ -19,36 +19,32 @@ class PromotionsMongoStorageSpec extends FlatSpec with Matchers with BeforeAndAf
 
 
   "all()" should "fetch 1 Promotion after it was stored there" in new LocalMongo {
-    val regionalPromotions = promotions.of(regionId)
+    promotions.save(somePromotion(regionId))
 
-    regionalPromotions.save(somePromotion(regionId))
-
-    regionalPromotions.all() should have size 1
+    promotions.all() should have size 1
   }
 
   "save()" should "should store Promotion object without throwing exception" in new LocalMongo {
-    promotions.of(regionId).save(somePromotion())
+    promotions.save(somePromotion())
   }
 
   "findById()" should "find previously stored Promotion" in new LocalMongo {
-    val regionalPromotions = promotions.of(regionId)
     val promotion = somePromotion()
     val promotionId = promotion.id.toString
 
-    regionalPromotions.save(promotion)
+    promotions.save(promotion)
 
-    regionalPromotions.findById(promotionId) should be equals promotion
+    promotions.findById(promotionId) should be equals promotion
   }
 
   "removeById()" should "remove by ID previously stored Promotion" in new LocalMongo {
-    val regionalPromotions = promotions.of(regionId)
     val promotion = somePromotion()
     val promotionId = promotion.id.toHexString
 
-    regionalPromotions.save(promotion)
-    regionalPromotions.removeById(promotionId)
+    promotions.save(promotion)
+    promotions.removeById(promotionId)
 
-    regionalPromotions.findById(promotionId) should be equals None
+    promotions.findById(promotionId) should be equals None
   }
 
   val someRegionName = "some region name"

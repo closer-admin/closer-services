@@ -64,12 +64,12 @@ sbt stage deployHeroku
 ## SERVICES:
 ### Regions:
 
-- `GET::/api/regions` - Get all Regions
-- `GET::/api/regions/:id` - Get Region by ID
-- `DELETE::/api/regions/:id` - Delete Region by ID
-- `PUT::/api/regions/:id` - Update Region
-- `POST::/api/regions` - Save Region
-- `POST::/api/regions/cover` - Return all regions that cover sent point.
+- `GET      /api/regions` - Get all Regions
+- `GET      /api/regions/:id` - Get Region by ID
+- `DELETE   /api/regions/:id` - Delete Region by ID
+- `PUT      /api/regions/:id` - Update Region
+- `POST     /api/regions` - Save Region
+- `POST     /api/regions/cover` - Return all regions that cover sent point.
 
 ```
 // Example of Location RQ object that should be sent to  /api/regions/cover endpoint
@@ -79,17 +79,20 @@ sbt stage deployHeroku
 }
 ```
 
-### Promotions:
-- `GET::/api/promotions` - Get all Promotions
-- `GET::/api/regions/:regionId/promotions` - Get all Promotions of particular Region
-- `GET::/api/promotions/:id` - Get Promotion by ID
-- `DELETE::/api/promotions/:id` - Delete Promotion by ID
-- `PUT::/api/promotions/:id` - Update Promotion
-- `POST::/api/promotions` - Save Promotion
-
 ### ServiceProviders:
-- `GET::/api/providers` - Get all Providers
-- `GET::/api/providers/:id` - Get Provider by ID
-- `DELETE::/api/providers/:id` - Delete Provider by ID
-- `PUT::/api/providers/:id` - Update Provider
-- `POST::/api/providers` - Save Provider
+- `GET      /api/providers` - Get all Providers
+- `GET      /api/providers/q?profileId=:profileId` - Get Provider by his profile ID (user_id)
+- `GET      /api/providers/:id` - Get Provider by ID
+- `DELETE   /api/providers/:id` - Delete Provider by ID
+- `PUT      /api/providers/:id` - Update Provider
+- `POST     /api/providers` - Save Provider
+
+### Promotions:
+- `GET      /api/promotions` - Get all Promotions
+- `GET      /api/promotions/q?serviceId=:serviceId` - Get all Promotions by ServiceId
+- `GET      /api/promotions/:id` - Get Promotion by ID
+- `DELETE   /api/promotions/:id` - Delete Promotion by ID
+- `PUT      /api/promotions/:id` - Update Promotion
+- `POST     /api/promotions` - Save Promotion
+- `GET      /api/regions/:regionId/promotions` - Get all Promotions of particular Region
+

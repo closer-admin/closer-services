@@ -23,9 +23,9 @@ class PromotionServiceImpl @Inject()(val promotions: PromotionStorage) extends P
 
   override def getByServiceId(id: String): Seq[Promotion] = promotions.findByServiceId(id)
 
-  override def save(regionId: String, promo: Promotion): Promotion = {
+  override def save(promo: Promotion): Promotion = {
     val promoEntity: PromotionEntity = PromotionFormat.apply(promo)
-    promotions.of(regionId).save(promoEntity)
+    promotions.save(promoEntity)
     PromotionFormat.unapply(promoEntity)
   }
 

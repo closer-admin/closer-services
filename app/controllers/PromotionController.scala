@@ -17,8 +17,8 @@ class PromotionController @Inject()(val promotions: PromotionService) extends Co
     promotions.allOfRegion(regionId)
   }
 
-  def save(regionId: String) = SaveActionTemplate { promo: Promotion =>
-        promotions.save(regionId, promo)
+  def save() = SaveActionTemplate { promo: Promotion =>
+        promotions.save(promo)
   }
 
   def removeById(id: String) = ActionTemplate { request =>

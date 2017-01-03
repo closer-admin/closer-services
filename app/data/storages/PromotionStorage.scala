@@ -31,15 +31,10 @@ trait PromotionStorage {
 
   class RegionPromotions(val regionId: String) {
 
-    def all() = self.allOfRegion(regionId): Seq[PromotionEntity]
-
-    def save(promo: PromotionEntity): Unit = self.save(promo)
-
-    def removeById(id: String): Unit = self.removeById(id)
-
-    def findById(id: String): Option[PromotionEntity] = self.findById(id)
+    def all() = self.allOfRegion(regionId)
 
     def removeAll(): Unit = self.removeAllOfRegion(regionId)
+
   }
 
 }
