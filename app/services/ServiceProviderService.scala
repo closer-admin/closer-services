@@ -1,6 +1,6 @@
 package services
 
-import model.ServiceProvider
+import model.{Location, ServiceProvider}
 
 trait ServiceProviderService {
 
@@ -15,4 +15,7 @@ trait ServiceProviderService {
   def getPyProfileId(id: String): Option[ServiceProvider]
 
   def removeById(id: String): Unit
+
+  def getNearest(center: Location, radius: Double, num: Int) : Seq[ServiceProvider]
+
 }

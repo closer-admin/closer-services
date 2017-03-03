@@ -5,6 +5,7 @@ import javax.inject.{Inject, Singleton}
 import model.ServiceProvider
 import play.api.mvc._
 import services.ServiceProviderService
+import web.NearestProvidersRq
 
 @Singleton
 class ServiceProviderController @Inject()(val services: ServiceProviderService) extends Controller with ControllerTemplates {
@@ -32,5 +33,9 @@ class ServiceProviderController @Inject()(val services: ServiceProviderService) 
 
   def getByProfileId(profileId: String) = ActionTemplate { request =>
     services.getPyProfileId(profileId)
+  }
+
+  def getNearest = ParseRequestTemplate { rq: NearestProvidersRq =>
+    services.getNearest(rq.center, rq.radius, rq.num)
   }
 }

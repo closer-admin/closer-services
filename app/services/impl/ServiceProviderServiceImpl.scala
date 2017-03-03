@@ -4,7 +4,7 @@ import javax.inject.{Inject, Singleton}
 
 import data.entities.ServiceProviderEntity
 import data.storages.ServiceProviderStorage
-import model.ServiceProvider
+import model.{Location, ServiceProvider}
 import services.ServiceProviderService
 import services.convertion.ServiceProviderFormat
 
@@ -31,7 +31,15 @@ class ServiceProviderServiceImpl @Inject()(val services: ServiceProviderStorage)
 
   def getPyProfileId(id: String): Option[ServiceProvider] = services.findByProfileId(id)
 
-  def removeById(id: String): Unit = services.removeById(id)
+  def removeById(id: String) = services.removeById(id)
+
+  def getNearest(center: Location, radius: Double, num: Int) = {
+    def distance(s: ServiceProvider) = s.addressDetails.location.distance(center)
+    this.all()
+      .filter(s => radius <= distance(s))
+      .sortBy(s => distance(s))
+      .take(num)
+  }
 }
 
 

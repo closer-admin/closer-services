@@ -86,6 +86,22 @@ sbt stage deployHeroku
 - `DELETE   /api/providers/:id` - Delete Provider by ID
 - `PUT      /api/providers/:id` - Update Provider
 - `POST     /api/providers` - Save Provider
+- `POST     /api/providers/nearest` - Return nearest providers.
+
+```
+// Example of RQ object that should be sent to /api/providers/nearest endpoint.
+// center - center point of region for search
+// radius - radius of region for search (DEFAULT 500m)
+// num - num records to return (DEFAULT 10 records)
+{
+    center: {
+        "latitude": 53.9298819,
+        "longitude": 27.5772205
+    },
+    radius: 500,
+    num: 10
+}
+```
 
 ### Promotions:
 - `GET      /api/promotions` - Get all Promotions

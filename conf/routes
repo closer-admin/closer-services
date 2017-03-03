@@ -24,6 +24,7 @@ GET           /api/providers/:id                           @controllers.ServiceP
 DELETE        /api/providers/:id                           @controllers.ServiceProviderController.removeById(id)
 PUT           /api/providers/:id                           @controllers.ServiceProviderController.update(id)
 POST          /api/providers                               @controllers.ServiceProviderController.save
+POST          /api/providers/nearest                       @controllers.ServiceProviderController.getNearest
 
 # Promotions
 GET           /api/promotions                              @controllers.PromotionController.all
