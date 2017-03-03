@@ -1,0 +1,15 @@
+# See http://about.travis-ci.org/docs/user/build-configuration/
+language: scala
+scala:
+   - 2.10.5
+branches:
+  only:
+    - master
+notifications:
+  email:
+    on_success: never
+    on_failure: always
+jdk:
+  - oraclejdk8
+
+script: sbt ++$TRAVIS_SCALA_VERSION stage deployHeroku
