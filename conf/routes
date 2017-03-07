@@ -33,6 +33,7 @@ GET           /api/promotions/:id                          @controllers.Promotio
 DELETE        /api/promotions/:id                          @controllers.PromotionController.removeById(id)
 PUT           /api/promotions/:id                          @controllers.PromotionController.update(id)
 POST          /api/promotions                              @controllers.PromotionController.save()
+POST          /api/promotions/nearest                      @controllers.PromotionController.getNearest
 GET           /api/regions/:regionId/promotions            @controllers.PromotionController.allOfRegion(regionId)
 
 # Map static resources from the /public folder to the /assets URL path

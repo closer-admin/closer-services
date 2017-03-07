@@ -28,6 +28,7 @@ trait PromotionStorage {
 
   def removeAllOfRegion(regionId: String): Unit
 
+  def findAllByProvidersIds(ids: Seq[String]): Seq[PromotionEntity]
 
   class RegionPromotions(val regionId: String) {
 

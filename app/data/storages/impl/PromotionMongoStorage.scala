@@ -6,7 +6,7 @@ import com.mongodb.casbah.WriteConcern
 import com.novus.salat.dao.SalatDAO
 import com.novus.salat.global._
 import config._
-import data.entities.{PromotionEntity, RegionEntity}
+import data.entities.{PromotionEntity}
 import data.storages.PromotionStorage
 import data.storages.common.MongoQueryAliaces
 
@@ -45,5 +45,9 @@ class PromotionMongoStorage @Inject()(mongo: Mongo) extends PromotionStorage wit
     dao.findOne($oid(id)) foreach { originRegion =>
       dao.update($oid(id), promotion, upsert, multi, WriteConcern.Normal)
     }
+  }
+
+  override def findAllByProvidersIds(ids: Seq[String]): Seq[PromotionEntity] = {
+    dao.find($o(serviceLink ->  $in(ids.map($id)))).toSeq
   }
 }

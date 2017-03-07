@@ -1,6 +1,7 @@
 package services
 
-import model.Promotion
+import model.{Location, Promotion}
+import web.PromotionSearchRS
 
 trait PromotionService {
 
@@ -17,5 +18,7 @@ trait PromotionService {
   def removeById(id: String): Unit
 
   def update(id: String, promotion: Promotion): Promotion
-  
+
+  def getNearest(center: Location, radius: Double, num: Int) : Seq[PromotionSearchRS]
+
 }

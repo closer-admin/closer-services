@@ -5,6 +5,7 @@ import javax.inject.{Inject, Singleton}
 import model.Promotion
 import play.api.mvc._
 import services.PromotionService
+import web.SearchRQ
 
 @Singleton
 class PromotionController @Inject()(val promotions: PromotionService) extends Controller with ControllerTemplates {
@@ -36,6 +37,10 @@ class PromotionController @Inject()(val promotions: PromotionService) extends Co
 
   def update(id: String) = SaveActionTemplate { promotion: Promotion=>
     promotions.update(id, promotion)
+  }
+
+  def getNearest = ParseRequestTemplate { rq: SearchRQ =>
+    promotions.getNearest(rq.center, rq.radius, rq.num)
   }
 
 }

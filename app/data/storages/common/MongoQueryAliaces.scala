@@ -17,6 +17,8 @@ trait MongoQueryAliaces {
 
   def $oid() = $o(_id -> new ObjectId())
 
+  def  $in[T <: ObjectId](values: Seq[T]) = $o("$in" -> values)
+
 }
 
 object MongoQueryAliaces extends MongoQueryAliaces

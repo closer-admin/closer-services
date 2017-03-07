@@ -110,5 +110,6 @@ sbt stage deployHeroku
 - `DELETE   /api/promotions/:id` - Delete Promotion by ID
 - `PUT      /api/promotions/:id` - Update Promotion
 - `POST     /api/promotions` - Save Promotion
+- `POST     /api/promotions/nearest` - Return nearest promotions.
 - `GET      /api/regions/:regionId/promotions` - Get all Promotions of particular Region
 
