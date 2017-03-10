@@ -6,13 +6,15 @@ import data.entities.PromotionEntity
 import data.storages.{PromotionStorage, ServiceProviderStorage}
 import model.{Location, Promotion, ServiceProvider}
 import services.PromotionService
-import services.convertion.{PromotionFormat, ServiceProviderFormat}
+import services.convertion.{ObjectIdFormat, PromotionFormat, ServiceProviderFormat}
 import web.PromotionSearchRS
 
 @Singleton
 class PromotionServiceImpl @Inject()(val promotions: PromotionStorage, val services: ServiceProviderStorage) extends PromotionService {
 
   import PromotionFormat._
+
+  val defaultRadius: Double = 500
 
   override def all(): Seq[Promotion] = promotions.all()
 
@@ -36,23 +38,28 @@ class PromotionServiceImpl @Inject()(val promotions: PromotionStorage, val servi
     PromotionFormat.unapply(promotionEntity)
   }
 
-  override def getNearest(center: Location, radius: Double, num: Int): Seq[PromotionSearchRS] = {
-    def distance(s: ServiceProvider) = s.addressDetails.location.distance(center)
+  override def getNearest(center: Location, radius: Option[Double], num: Option[Int]): Seq[PromotionSearchRS] = {
+
+    def distance(s: ServiceProvider): Double = s.addressDetails.location.distance(center)
 
     val nearestProviders = ServiceProviderFormat.unapply(this.services.all())
-      .filter(s => radius <= distance(s))
+      .filter(s => distance(s) <= radius.getOrElse(defaultRadius) )
 
     val ids = nearestProviders.map(_.id) map {
       case Some(id) => id
     }
 
-    val responses = PromotionFormat.unapply(promotions.findAllByProvidersIds(ids))
-      .map({ promo =>
-        val prov = nearestProviders.find(_.id.orNull == promo.serviceId)
-        new PromotionSearchRS(promo, prov.orNull)
-      })
+    val responses = promotions.findAllByProvidersIds(ids)
+      .flatMap { promo =>
+        val prov = nearestProviders.find(_.id == ObjectIdFormat.unapplyToOpt(promo.serviceId))
+        if (prov.isDefined) Some(new PromotionSearchRS(promo, prov.get))
+        else None
+      }
 
-    responses.take(num)
+    num match {
+      case Some(n) => responses.take(n)
+      case None => responses.seq
+    }
   }
 }
 

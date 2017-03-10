@@ -13,32 +13,40 @@ class ServiceProviderServiceImpl @Inject()(val services: ServiceProviderStorage)
 
   import ServiceProviderFormat._
 
-  def all(): Seq[ServiceProvider] = services.all()
+  val defaultRadius: Double = 500
 
-  def save(service: ServiceProvider): ServiceProvider = {
+  override def all(): Seq[ServiceProvider] = services.all()
+
+  override def save(service: ServiceProvider): ServiceProvider = {
     val servicesEntity: ServiceProviderEntity = ServiceProviderFormat.apply(service)
     services.save(servicesEntity)
     ServiceProviderFormat.unapply(servicesEntity)
   }
 
-  def update(id: String, ServiceProvider: ServiceProvider): ServiceProvider = {
+  override def update(id: String, ServiceProvider: ServiceProvider): ServiceProvider = {
     val ServiceProviderEntity: ServiceProviderEntity = ServiceProviderFormat.apply(ServiceProvider)
     services.update(id, ServiceProviderEntity)
     ServiceProviderFormat.unapply(ServiceProviderEntity)
   }
 
-  def getById(id: String): Option[ServiceProvider] = services.findById(id)
+  override def getById(id: String): Option[ServiceProvider] = services.findById(id)
 
-  def getPyProfileId(id: String): Option[ServiceProvider] = services.findByProfileId(id)
+  override def getPyProfileId(id: String): Option[ServiceProvider] = services.findByProfileId(id)
 
-  def removeById(id: String) = services.removeById(id)
+  override def removeById(id: String): Unit = services.removeById(id)
 
-  def getNearest(center: Location, radius: Double, num: Int) = {
-    def distance(s: ServiceProvider) = s.addressDetails.location.distance(center)
-    this.all()
-      .filter(s => radius <= distance(s))
+  override def getNearest(center: Location, radius: Option[Double], num: Option[Int]): Seq[ServiceProvider] = {
+
+    def distance(s: ServiceProvider): Double = s.addressDetails.location.distance(center)
+
+    val res = this.all()
+      .filter(s => distance(s) <= radius.getOrElse(defaultRadius) )
       .sortBy(s => distance(s))
-      .take(num)
+
+    num match {
+      case Some(n) => res.take(n)
+      case None => res.seq
+    }
   }
 }
 

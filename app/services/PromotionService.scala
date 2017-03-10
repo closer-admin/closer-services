@@ -19,6 +19,6 @@ trait PromotionService {
 
   def update(id: String, promotion: Promotion): Promotion
 
-  def getNearest(center: Location, radius: Double, num: Int) : Seq[PromotionSearchRS]
+  def getNearest(center: Location, radius: Option[Double], num: Option[Int]) : Seq[PromotionSearchRS]
 
 }

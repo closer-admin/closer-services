@@ -16,6 +16,6 @@ trait ServiceProviderService {
 
   def removeById(id: String): Unit
 
-  def getNearest(center: Location, radius: Double, num: Int) : Seq[ServiceProvider]
+  def getNearest(center: Location, radius: Option[Double], num: Option[Int]) : Seq[ServiceProvider]
 
 }
